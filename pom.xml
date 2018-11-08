@@ -9,7 +9,7 @@
     <packaging>jar</packaging>
 
     <name>spring-connection-pool-metrics</name>
-    <description>Demo project for Spring Boot</description>
+    <description>Spring http connection pool monitoring tool</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -22,9 +22,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <dependency-check-format>HTML</dependency-check-format>
-        <dependency-check-failBuildOnCVSS>11</dependency-check-failBuildOnCVSS>
-        <dependency-check-failBuildOnAnyVulnerability>false</dependency-check-failBuildOnAnyVulnerability>
     </properties>
 
     <dependencies>
