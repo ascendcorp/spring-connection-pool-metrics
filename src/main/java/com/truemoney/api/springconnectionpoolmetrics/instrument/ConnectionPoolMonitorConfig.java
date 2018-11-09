@@ -1,4 +1,4 @@
-package com.truemoney.api.connectionpoolmetric.instrument;
+package com.truemoney.api.springconnectionpoolmetrics.instrument;
 
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.springframework.beans.factory.annotation.Value;
