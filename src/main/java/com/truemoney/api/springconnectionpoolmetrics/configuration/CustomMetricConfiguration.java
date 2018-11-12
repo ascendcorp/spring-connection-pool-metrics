@@ -4,6 +4,7 @@ import io.micrometer.core.instrument.Tag;
 import io.micrometer.core.instrument.Tags;
 import org.springframework.boot.actuate.metrics.web.servlet.DefaultWebMvcTagsProvider;
 import org.springframework.boot.actuate.metrics.web.servlet.WebMvcTagsProvider;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.StringUtils;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 class CustomMetricConfiguration {
 
     @Bean
+    @ConditionalOnMissingBean
     public WebMvcTagsProvider webMvcTagsProvider() {
         return new DefaultWebMvcTagsProvider() {
             @Override
