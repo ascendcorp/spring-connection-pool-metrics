@@ -1,1 +1,3 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.truemoney.api.springconnectionpoolmetrics.instrument.ConnectionPoolMonitorConfig
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.truemoney.api.springconnectionpoolmetrics.instrument.ConnectionPoolMonitorConfig,\
+  com.truemoney.api.springconnectionpoolmetrics.configuration.CustomMetricConfiguration
