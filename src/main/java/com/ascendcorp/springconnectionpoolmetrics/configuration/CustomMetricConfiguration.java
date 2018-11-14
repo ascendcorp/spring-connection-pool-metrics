@@ -1,4 +1,4 @@
-package com.truemoney.api.springconnectionpoolmetrics.configuration;
+package com.ascendcorp.springconnectionpoolmetrics.configuration;
 
 import io.micrometer.core.instrument.Tag;
 import io.micrometer.core.instrument.Tags;

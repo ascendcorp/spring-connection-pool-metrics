@@ -1,4 +1,4 @@
-package com.truemoney.api.springconnectionpoolmetrics.instrument;
+package com.ascendcorp.springconnectionpoolmetrics.instrument;
 
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.pool.PoolStats;

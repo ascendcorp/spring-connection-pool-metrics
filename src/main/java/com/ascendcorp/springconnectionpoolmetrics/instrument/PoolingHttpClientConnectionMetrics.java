@@ -1,4 +1,4 @@
-package com.truemoney.api.springconnectionpoolmetrics.instrument;
+package com.ascendcorp.springconnectionpoolmetrics.instrument;
 
 import io.micrometer.core.instrument.Gauge;
 import io.micrometer.core.instrument.MeterRegistry;
