@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.truemoney.api</groupId>
+    <groupId>io.github.ascendcorp</groupId>
     <artifactId>spring-connection-pool-metrics</artifactId>
     <version>0.0.1</version>
     <packaging>jar</packaging>
@@ -22,6 +22,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
+        <httpclient.version>4.5.1</httpclient.version>
+        <micrometer-registry-prometheus.version>1.1.0</micrometer-registry-prometheus.version>
+        <servlet-api.version>2.3</servlet-api.version>
+        <spring-webmvc.version>5.0.2.RELEASE</spring-webmvc.version>
     </properties>
 
     <dependencies>
@@ -41,23 +45,22 @@
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>4.5.1</version>
+            <version>${httpclient.version}</version>
         </dependency>
         <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-registry-prometheus</artifactId>
-            <version>1.1.0</version>
+            <version>${micrometer-registry-prometheus.version}</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
-            <version>2.3</version>
+            <version>${servlet-api.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>5.0.2.RELEASE</version>
+            <version>${spring-webmvc.version}</version>
         </dependency>
     </dependencies>
-
 </project>
