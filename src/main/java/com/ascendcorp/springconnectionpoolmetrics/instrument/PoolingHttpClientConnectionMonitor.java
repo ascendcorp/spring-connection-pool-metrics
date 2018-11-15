@@ -8,7 +8,7 @@ import org.apache.http.pool.PoolStats;
  * The sleep time between each stats check should not be too frequently due to the fact that the implementation of the
  * connection pool used by PoolingHttpClientConnectionManager is locked during the call to its getTotalStats() method.
  */
-class PoolingHttpClientConnectionMonitor extends Thread {
+public class PoolingHttpClientConnectionMonitor extends Thread {
 
     private final PoolingHttpClientConnectionManager connMgr;
     private long sleepTime;
