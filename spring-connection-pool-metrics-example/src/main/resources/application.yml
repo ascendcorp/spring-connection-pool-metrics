@@ -1,0 +1,19 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info, health, prometheus, metrics
+      base-path: /
+      path-mapping:
+        prometheus: /metrics
+        metrics: /actuator/metrics
+rest:
+  default:
+    connection:
+      connection-request-timeout: 5000
+      connect-timeout: 5000
+      read-timeout: 5000
+
+endpoints:
+  prometheus:
+    enabled: true
