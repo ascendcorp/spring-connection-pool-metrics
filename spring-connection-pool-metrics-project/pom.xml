@@ -23,7 +23,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <httpclient.version>4.5.1</httpclient.version>
-        <micrometer-registry-prometheus.version>1.1.0</micrometer-registry-prometheus.version>
+        <micrometer-registry-prometheus.version>1.0.5</micrometer-registry-prometheus.version>
         <servlet-api.version>2.3</servlet-api.version>
         <spring-webmvc.version>5.0.2.RELEASE</spring-webmvc.version>
     </properties>
