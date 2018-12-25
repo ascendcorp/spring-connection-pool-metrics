@@ -27,18 +27,23 @@ import java.util.Map;
 @Configuration
 class ConnectionPoolMonitorConfig {
 
-    @Value("${connection-pool-metric.metric-name:connection-pool}")
+    @Value("${connection-pool-metrics.metric-name:connection-pool}")
     private String metricName;
 
-    @Value("${connection-pool-metric.sleep-time:30000}")
+    @Value("${connection-pool-metrics.sleep-time:30000}")
     private long sleepTime;
+
+    @Value("${connection-pool-metrics.enabled-route:false}")
+    private boolean enabledRoute;
 
     @Bean
     @ConditionalOnMissingBean
     public PoolingHttpClientConnectionMetrics poolingHttpClientConnectionMetrics(ApplicationContext ctx) {
-        PoolingHttpClientConnectionMetrics metrics = new PoolingHttpClientConnectionMetrics(metricName, sleepTime);
+        PoolingHttpClientConnectionMetrics metrics = new PoolingHttpClientConnectionMetrics(metricName, sleepTime, enabledRoute);
         Map<String, PoolingHttpClientConnectionManager> poolingHttpClientConnectionManagers = ctx.getBeansOfType(PoolingHttpClientConnectionManager.class);
-        poolingHttpClientConnectionManagers.forEach(metrics::createMonitor);
+        poolingHttpClientConnectionManagers.forEach((poolName, connMgr) -> {
+            metrics.createMonitor(poolName, connMgr, metricName);
+        });
         return metrics;
     }
 
