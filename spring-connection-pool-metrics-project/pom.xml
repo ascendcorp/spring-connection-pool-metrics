@@ -63,17 +63,5 @@
             <version>${spring-webmvc.version}</version>
         </dependency>
     </dependencies>
-	<distributionManagement>
-		<repository>
-			<id>jenkins-nexus</id>
-			<name>Internal Truemoney package releases</name>
-			<url>http://nexus.tmn-dev.com/nexus/content/repositories/releases</url>
-		</repository>
-		<snapshotRepository>
-			<id>jenkins-nexus</id>
-			<name>Internal Truemoney package snapshots</name>
-			<url>http://nexus.tmn-dev.com/nexus/content/repositories/snapshots</url>
-		</snapshotRepository>
-	</distributionManagement>
     
 </project>
