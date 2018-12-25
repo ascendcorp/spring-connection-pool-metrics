@@ -27,10 +27,10 @@ import java.util.Map;
 @Configuration
 class ConnectionPoolMonitorConfig {
 
-    @Value("${connection-pool-metric.metric-name:connection-pool}")
+    @Value("${connection-pool-metrics.metric-name:connection-pool}")
     private String metricName;
 
-    @Value("${connection-pool-metric.sleep-time:30000}")
+    @Value("${connection-pool-metrics.sleep-time:30000}")
     private long sleepTime;
 
     @Bean
