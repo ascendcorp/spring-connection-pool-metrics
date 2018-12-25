@@ -15,6 +15,9 @@
  */
 package com.ascendcorp.springconnectionpoolmetrics.instrument;
 
+import io.micrometer.core.instrument.Metrics;
+import io.micrometer.core.instrument.Tags;
+import org.apache.http.conn.routing.HttpRoute;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.pool.PoolStats;
 
@@ -26,16 +29,22 @@ import org.apache.http.pool.PoolStats;
 public class PoolingHttpClientConnectionMonitor extends Thread {
 
     private final PoolingHttpClientConnectionManager connMgr;
-    private long sleepTime;
+
     private volatile boolean shutdown;
     private String poolName;
     private PoolStats poolStats;
+    private long sleepTime;
+    private String metricPerRouteName;
+    private boolean enabledRoute;
 
-    public PoolingHttpClientConnectionMonitor(String poolName, PoolingHttpClientConnectionManager connMgr, long sleepTime) {
+
+    public PoolingHttpClientConnectionMonitor(String poolName, PoolingHttpClientConnectionManager connMgr, long sleepTime, String metricName, boolean enabledRoute) {
         this.poolName = poolName;
         this.connMgr = connMgr;
         this.poolStats = connMgr.getTotalStats();
         this.sleepTime = sleepTime;
+        this.metricPerRouteName = metricName + "_per_route";
+        this.enabledRoute = enabledRoute;
 
         this.start();
     }
@@ -46,7 +55,9 @@ public class PoolingHttpClientConnectionMonitor extends Thread {
             while (!shutdown) {
                 synchronized (this) {
                     wait(sleepTime);
-                    this.poolStats = connMgr.getTotalStats();
+                    this.poolStats = this.connMgr.getTotalStats();
+                    if (enabledRoute)
+                        this.connMgr.getRoutes().forEach(route -> updateConnectionPoolPerRoute(route, this.connMgr.getStats(route)));
                 }
             }
         } catch (InterruptedException ex) {
@@ -59,6 +70,13 @@ public class PoolingHttpClientConnectionMonitor extends Thread {
         synchronized (this) {
             notifyAll();
         }
+    }
+
+    private void updateConnectionPoolPerRoute(HttpRoute route, PoolStats poolStats) {
+        Metrics.gauge(metricPerRouteName, Tags.of("id", "available", "name", this.poolName, "route", route.getTargetHost().getHostName()), poolStats.getAvailable());
+        Metrics.gauge(metricPerRouteName, Tags.of("id", "leased", "name", this.poolName, "route", route.getTargetHost().getHostName()), poolStats.getLeased());
+        Metrics.gauge(metricPerRouteName, Tags.of("id", "pending", "name", this.poolName, "route", route.getTargetHost().getHostName()), poolStats.getPending());
+        Metrics.gauge(metricPerRouteName, Tags.of("id", "max", "name", this.poolName, "route", route.getTargetHost().getHostName()), poolStats.getMax());
     }
 
     String getPoolName() {

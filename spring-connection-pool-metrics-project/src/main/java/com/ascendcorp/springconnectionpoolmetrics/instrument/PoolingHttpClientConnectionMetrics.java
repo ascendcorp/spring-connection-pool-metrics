@@ -29,10 +29,12 @@ class PoolingHttpClientConnectionMetrics implements MeterBinder {
     private final List<PoolingHttpClientConnectionMonitor> monitors;
     private String metricName;
     private long sleepTime;
+    private boolean enabledRoute;
 
-    public PoolingHttpClientConnectionMetrics(String metricName, long sleepTime) {
+    public PoolingHttpClientConnectionMetrics(String metricName, long sleepTime, boolean enabledRoute) {
         this.metricName = metricName;
         this.sleepTime = sleepTime;
+        this.enabledRoute = enabledRoute;
         this.monitors = new ArrayList<>();
     }
 
@@ -63,8 +65,8 @@ class PoolingHttpClientConnectionMetrics implements MeterBinder {
 
     }
 
-    void createMonitor(String metricName, PoolingHttpClientConnectionManager connMgr) {
-        PoolingHttpClientConnectionMonitor monitor = new PoolingHttpClientConnectionMonitor(metricName, connMgr, sleepTime);
+    void createMonitor(String poolName, PoolingHttpClientConnectionManager connMgr, String metricName) {
+        PoolingHttpClientConnectionMonitor monitor = new PoolingHttpClientConnectionMonitor(poolName, connMgr, sleepTime, metricName, enabledRoute);
         this.monitors.add(monitor);
     }
 
